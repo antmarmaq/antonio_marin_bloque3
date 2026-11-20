@@ -1,33 +1,32 @@
-from datetime import date
-
 from colorama import *
 
 from .logger import logger
 
 
-def validate_plate(plate):
-    return len(plate) == 7 and plate[:4].isdigit() and plate[3:].isalpha()
-
-
-def input_date():
+class GestorSistema:
     """
-    Muestra una serie de inputs para dia, mes y año y devuelve una fecha en formato string DD/MM/AAAA
+    Clase que gestiona el sistema de alquiler de vehiculos
     """
-    while True:
-        day = input(Fore.YELLOW + "Escriba el día (en formado dd): " + Style.RESET_ALL)
-        month = input(
-            Fore.YELLOW + "Escriba el mes (en formato mm): " + Style.RESET_ALL
-        )
-        year = input(
-            Fore.YELLOW + "Escriba el año (en formato yyyy): " + Style.RESET_ALL
-        )
-        try:
-            selected_date = date(day=int(day), month=int(month), year=int(year))
-        except ValueError:
-            logger.error(
-                "La fecha introducida no es valida, asegurese de introducirla en el formato adecuado."
-            )
-            continue
+
+    def __init__(self):
+        self.vehiculos = []
+
+    def add_vehicle(self, vehicle):
+        self.vehiculos.append(vehicle)
+
+    def reserve_vehicle(self, vehicle, date):
+        if vehicle not in self.vehiculos:
+            logger.error("El vehiculo no se ha encontrado en la flota")
+            return False
+        if date < date.today():
+            logger.error("La fecha de reserva no puede ser anterior a la fecha actual")
+            return False
+        if date in vehicle.reservations:
+            logger.error(f"El vehiculo {vehicle} está ocupado en la fecha {date}")
+            return False
         else:
-            break
-    return f"{selected_date}"
+            vehicle.add_reservation(date)
+            logger.info(
+                f"Reserva del vehiculo {vehicle} añadida correctamente para el día {date}."
+            )
+            return True

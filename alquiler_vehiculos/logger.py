@@ -18,12 +18,12 @@ cfg = {
             "class": "logging.FileHandler",
             "level": "DEBUG",
             "formatter": "fichero",
-            "filename": "finanzas.log",
+            "filename": "logs.log",
             "encoding": "utf-8",
         },
     },
-    "loggers": {"finanzas": {"handlers": ["consola", "fichero"], "level": "DEBUG"}},
+    "loggers": {"alquiler": {"handlers": ["consola", "fichero"], "level": "DEBUG"}},
 }
 
 dictConfig(cfg)
-logger = logging.getLogger("finanzas")
+logger = logging.getLogger("alquiler")

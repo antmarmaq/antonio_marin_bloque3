@@ -66,11 +66,15 @@ def option2():
         title()
         if action == "1":
             while True:
-                plate = input(
-                    Fore.YELLOW
-                    + "Introduzca la matrícula del coche (formato: 0000AAA): "
-                    + Style.RESET_ALL
-                ).upper()
+                plate = (
+                    input(
+                        Fore.YELLOW
+                        + "Introduzca la matrícula del coche (formato: 0000AAA): "
+                        + Style.RESET_ALL
+                    )
+                    .upper()
+                    .replace(";", ",")
+                )
                 if validate_plate(plate) is False:
                     logger.error(
                         Fore.RED
@@ -78,12 +82,24 @@ def option2():
                         + Style.RESET_ALL
                     )
                     continue
-                brand = input(
-                    Fore.YELLOW + "Introduzca la marca del coche: " + Style.RESET_ALL
-                ).capitalize()
-                model = input(
-                    Fore.YELLOW + "Introduzca el modelo del coche: " + Style.RESET_ALL
-                ).capitalize()
+                brand = (
+                    input(
+                        Fore.YELLOW
+                        + "Introduzca la marca del coche: "
+                        + Style.RESET_ALL
+                    )
+                    .capitalize()
+                    .replace(";", ",")
+                )
+                model = (
+                    input(
+                        Fore.YELLOW
+                        + "Introduzca el modelo del coche: "
+                        + Style.RESET_ALL
+                    )
+                    .capitalize()
+                    .replace(";", ",")
+                )
                 vehicle = Coche(plate, brand, model)
                 gestor.add_vehicle(vehicle)
                 save(gestor)
@@ -96,11 +112,15 @@ def option2():
                 break
         if action == "2":
             while True:
-                plate = input(
-                    Fore.YELLOW
-                    + "Introduzca la matrícula de la moto (formato: 0000AAA): "
-                    + Style.RESET_ALL
-                ).upper()
+                plate = (
+                    input(
+                        Fore.YELLOW
+                        + "Introduzca la matrícula de la moto (formato: 0000AAA): "
+                        + Style.RESET_ALL
+                    )
+                    .upper()
+                    .replace(";", ",")
+                )
                 if validate_plate(plate) is False:
                     logger.error(
                         Fore.RED
@@ -108,12 +128,24 @@ def option2():
                         + Style.RESET_ALL
                     )
                     continue
-                brand = input(
-                    Fore.YELLOW + "Introduzca la marca de la moto: " + Style.RESET_ALL
-                ).capitalize()
-                model = input(
-                    Fore.YELLOW + "Introduzca el modelo de la moto: " + Style.RESET_ALL
-                ).capitalize()
+                brand = (
+                    input(
+                        Fore.YELLOW
+                        + "Introduzca la marca de la moto: "
+                        + Style.RESET_ALL
+                    )
+                    .capitalize()
+                    .replace(";", ",")
+                )
+                model = (
+                    input(
+                        Fore.YELLOW
+                        + "Introduzca el modelo de la moto: "
+                        + Style.RESET_ALL
+                    )
+                    .capitalize()
+                    .replace(";", ",")
+                )
                 vehicle = Moto(plate, brand, model)
                 gestor.add_vehicle(vehicle)
                 save(gestor)

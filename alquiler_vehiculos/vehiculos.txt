@@ -1,0 +1,5 @@
+Coche;8163ASD;Bmw;I3
+Coche;1234ABC;Bmw;I3
+Coche;1234ABD;Bmw;I3
+Coche;1735GFH;Bmw;I6-emodern
+Moto;8163GTW;Yamaha;Tmax 2025-2026

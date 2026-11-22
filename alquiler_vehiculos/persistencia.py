@@ -12,28 +12,25 @@ KINDS = {"Coche": Coche, "Moto": Moto}
 def save(gestor):
     with VEHICLES_FILE.open("w", encoding="utf-8") as f:
         for vehicle in gestor.vehicles:
-            f.write(
-                ";".join[vehicle.kind, vehicle.plate, vehicle.brand, vehicle.model]
-                + "\n"
-            )
+            f.write(f"{vehicle.kind};{vehicle.plate};{vehicle.brand};{vehicle.model}\n")
     with RESERVATIONS_FILE.open("w", encoding="utf-8") as f:
         for vehicle in gestor.vehicles:
-            for reservation in vehicle.reservations():
+            for reservation in vehicle.reservations:
                 f.write(f"{vehicle.plate}';'{reservation.isoformat()}\n")
 
 
 def load(gestor):
     if VEHICLES_FILE.exists():
         for line in VEHICLES_FILE.read_text(encoding="utf-8").splitlines():
-            if not line.stip():
+            if not line.strip():
                 continue
-        kind, plate, brand, model = line.split(";")
-        if kind == "Coche":
-            gestor.add_vehicle(Coche(plate, brand, model))
-        elif kind == "Moto":
-            gestor.add_vehicle(Moto(plate, brand, model))
-        else:
-            raise ValueError
+            kind, plate, brand, model = line.split(";")
+            if kind == "Coche":
+                gestor.add_vehicle(Coche(plate, brand, model))
+            elif kind == "Moto":
+                gestor.add_vehicle(Moto(plate, brand, model))
+            else:
+                raise ValueError
 
     if RESERVATIONS_FILE.exists():
         # Hacemos un diccionario que asocia matriculas con sus vehiculos

@@ -1,4 +1,0 @@
-Coche;1234ABC;Asd;Zxc
-Moto;9876XYZ;Lkj;Mnb
-Coche;1235QWE;Asdf;Oqiwey
-Moto;8163KAD;Oquhd;8712b3

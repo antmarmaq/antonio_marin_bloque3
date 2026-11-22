@@ -5,8 +5,6 @@ from .vehiculos import Coche, Moto
 
 VEHICLES_FILE = Path(__file__).parent.parent / "vehiculos.txt"
 RESERVATIONS_FILE = Path(__file__).parent.parent / "reservas.txt"
-# Para transformar el texto en la clase que hay que usar:
-KINDS = {"Coche": Coche, "Moto": Moto}
 
 
 def save(gestor):

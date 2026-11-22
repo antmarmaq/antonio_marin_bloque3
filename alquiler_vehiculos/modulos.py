@@ -77,9 +77,9 @@ def option2():
                     .replace(";", ",")
                 )
                 if validate_plate(plate) is False:
-                    (
+                    logger.error(
                         Fore.RED
-                        + logger.error("La matrícula introducida no es válida.")
+                        + "La matrícula introducida no es válida."
                         + Style.RESET_ALL
                     )
                     continue
@@ -123,9 +123,9 @@ def option2():
                     .replace(";", ",")
                 )
                 if validate_plate(plate) is False:
-                    (
+                    logger.error(
                         Fore.RED
-                        + logger.error("La matrícula introducida no es válida.")
+                        + "La matrícula introducida no es válida."
                         + Style.RESET_ALL
                     )
                     continue

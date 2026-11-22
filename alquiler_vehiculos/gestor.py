@@ -12,15 +12,19 @@ class GestorSistema:
     """
 
     def __init__(self):
-        self.vehicles = []
+        self._vehicles = []
         # Cargamos los datos de persistencia.py
         load(self)
+
+    @property
+    def vehicles(self):
+        return tuple(self._vehicles)
 
     def add_vehicle(self, vehicle):
         """
         Añade un objeto vehiculo al gestor
         """
-        self.vehicles.append(vehicle)
+        self._vehicles.append(vehicle)
 
     def find_vehicle(self, plate):
         """

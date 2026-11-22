@@ -1,4 +1,4 @@
-class Vehiculos:
+class Vehiculo:
     """
     Clase padre para todos los vehículos
     """
@@ -49,7 +49,7 @@ class Vehiculos:
         return f"{self.kind} {self.brand} {self.model} con matrícula ({self.plate})"
 
 
-class Coche(Vehiculos):
+class Coche(Vehiculo):
     """
     Clase que representa a los coches
     """
@@ -59,7 +59,7 @@ class Coche(Vehiculos):
         self.kind = "Coche"
 
 
-class Moto(Vehiculos):
+class Moto(Vehiculo):
     """
     Clase que representa a las motos
     """

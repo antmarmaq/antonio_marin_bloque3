@@ -3,8 +3,8 @@ from pathlib import Path
 
 from .vehiculos import Coche, Moto
 
-VEHICLES_FILE = Path(__file__).parent / "vehiculos.txt"
-RESERVATIONS_FILE = Path(__file__).parent / "reservas.txt"
+VEHICLES_FILE = Path(__file__).parent.parent / "vehiculos.txt"
+RESERVATIONS_FILE = Path(__file__).parent.parent / "reservas.txt"
 # Para transformar el texto en la clase que hay que usar:
 KINDS = {"Coche": Coche, "Moto": Moto}
 
@@ -16,7 +16,7 @@ def save(gestor):
     with RESERVATIONS_FILE.open("w", encoding="utf-8") as f:
         for vehicle in gestor.vehicles:
             for reservation in vehicle.reservations:
-                f.write(f"{vehicle.plate}';'{reservation.isoformat()}\n")
+                f.write(f"{vehicle.plate};{reservation.isoformat()}\n")
 
 
 def load(gestor):

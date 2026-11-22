@@ -32,7 +32,7 @@ def input_date():
                 )
         except ValueError:
             logger.error(
-                "La fecha introducida no es valida, asegurese de introducirla en el formato adecuado."
+                "La fecha introducida no es valida o ya ha pasado, asegurese de introducirla en el formato adecuado, incluyendo los ceros a la izquierda si son precisos"
             )
             continue
         else:

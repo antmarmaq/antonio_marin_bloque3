@@ -28,7 +28,7 @@ def option1():
                 cls()
                 title()
                 i = 1
-                logger.info("Lista de Coches registrados:")
+                print(Fore.YELLOW + "Lista de Coches registrados:" + Style.RESET_ALL)
                 for vehicle in gestor.vehicles:
                     if vehicle.kind == "Coche":
                         print(f"{i}. {vehicle}")
@@ -39,11 +39,12 @@ def option1():
                 cls()
                 title()
                 i = 1
-                logger.info("Lista de Motos registradas:\n")
+                print(Fore.YELLOW + "Lista de Motos registradas:\n" + Style.RESET_ALL)
                 for vehicle in gestor.vehicles:
                     if vehicle.kind == "Moto":
                         print(f"{i}. {vehicle}")
                         i += 1
+                print()
                 confirm()
                 break
             if action == "3":
@@ -76,9 +77,9 @@ def option2():
                     .replace(";", ",")
                 )
                 if validate_plate(plate) is False:
-                    logger.error(
+                    (
                         Fore.RED
-                        + "La matrícula introducida no es válida."
+                        + logger.error("La matrícula introducida no es válida.")
                         + Style.RESET_ALL
                     )
                     continue
@@ -122,9 +123,9 @@ def option2():
                     .replace(";", ",")
                 )
                 if validate_plate(plate) is False:
-                    logger.error(
+                    (
                         Fore.RED
-                        + "La matrícula introducida no es válida."
+                        + logger.error("La matrícula introducida no es válida.")
                         + Style.RESET_ALL
                     )
                     continue
@@ -165,8 +166,69 @@ def option2():
 
 
 def option3():
-    pass
+    """
+    Reservar un vehículo
+    """
+    cls()
+    title()
+    print(Fore.YELLOW + "Realizando nueva reserva." + Style.RESET_ALL)
+
+    # Nos aseguramos de que haya vehiculos que reservar
+    if not gestor.vehicles:
+        logger.error(Fore.RED + "No hay vehiculos registrados." + Style.RESET_ALL)
+        confirm()
+        return
+
+    search = input(
+        Fore.YELLOW
+        + "Introduzca la matrícula del vehiculo que desea reservar: "
+        + Style.RESET_ALL
+    ).upper()
+    vehicle = gestor.find_vehicle(search)
+
+    if vehicle is None:
+        logger.error(
+            Fore.RED
+            + f"El vehiculo con matricula {search} no se ha encontrado"
+            + Style.RESET_ALL
+        )
+
+    reservation = input_date()
+    if gestor.reserve_vehicle(vehicle, reservation):
+        save(gestor)
+        print(Fore.GREEN + "Reserva realizada correctamente" + Style.RESET_ALL)
+    else:
+        logger.error(
+            Fore.RED + "Ha habido un problema al realizar la reserva" + Style.RESET_ALL
+        )
+
+    confirm()
 
 
 def option4():
-    pass
+    """
+    Consultar lista de reservas
+    """
+    cls()
+    title()
+    print(Fore.YELLOW + "Consulta de reservas:\n" + Style.RESET_ALL)
+    all_reservations = [
+        (reservation, vehicle)
+        for vehicle in gestor.vehicles
+        for reservation in vehicle.reservations
+    ]
+    if not all_reservations:
+        logger.info(
+            Fore.RED
+            + "No hay ninguna reserva registrada en el sistema\n"
+            + Style.RESET_ALL
+        )
+        confirm()
+    else:
+        i = 1
+        for reservation, vehicle in all_reservations:
+            print(f"{i} {reservation}, {vehicle}")
+            i += 1
+        print()
+        confirm()
+        return

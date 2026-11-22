@@ -48,3 +48,15 @@ def gestion_menu():
     print("\U00002551" + " 2. Añadir Moto             " + "\U00002551")
     print("\U00002551" + " 3. Volver al menú principal" + "\U00002551")
     print("\U0000255a" + 28 * "\U00002550" + "\U0000255d\n" + Style.RESET_ALL)
+
+
+def fleet_menu():
+    """
+    Imprime el menu para ver los vehículos
+    """
+    print(Fore.YELLOW + "\nBienvenido a la gestión de flota de vehículos.")
+    print("\U00002554" + 28 * "\U00002550" + "\U00002557")
+    print("\U00002551" + " 1. Ver Coches              " + "\U00002551")
+    print("\U00002551" + " 2. Ver Motos               " + "\U00002551")
+    print("\U00002551" + " 3. Volver al menú principal" + "\U00002551")
+    print("\U0000255a" + 28 * "\U00002550" + "\U0000255d\n" + Style.RESET_ALL)

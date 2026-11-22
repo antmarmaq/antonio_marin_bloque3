@@ -37,4 +37,4 @@ def input_date():
             continue
         else:
             break
-    return f"{selected_date}"
+    return selected_date

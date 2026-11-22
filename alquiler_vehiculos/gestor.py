@@ -1,6 +1,7 @@
 from colorama import *
 
 from .logger import logger
+from .persistencia import load
 
 
 class GestorSistema:
@@ -9,13 +10,15 @@ class GestorSistema:
     """
 
     def __init__(self):
-        self.vehiculos = []
+        self.vehicles = []
+        # Cargamos los datos de persistencia.py
+        load(self)
 
     def add_vehicle(self, vehicle):
-        self.vehiculos.append(vehicle)
+        self.vehicles.append(vehicle)
 
     def reserve_vehicle(self, vehicle, date):
-        if vehicle not in self.vehiculos:
+        if vehicle not in self.vehicles:
             logger.error("El vehiculo no se ha encontrado en la flota")
             return False
         if date < date.today():

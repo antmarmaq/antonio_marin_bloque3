@@ -1,4 +1,5 @@
 from alquiler_vehiculos.display import cls, menu, title
+from alquiler_vehiculos.modulos import *
 
 """
 // 1. INICIALIZACIÓN
@@ -22,17 +23,20 @@ try:
         action = input("Seleccione el número de la operación a realizar: ")
 
         if action == "1":
-            pass
+            option1()
 
         if action == "2":
-            pass
+            option2()
 
         if action == "3":
-            pass
+            option3()
 
         if action == "4":
-            break
+            option4()
 
+        if action == "5":
+            print("Cerrando el programa...")
+            break
         else:
             continue
 

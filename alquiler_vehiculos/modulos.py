@@ -1,139 +1,73 @@
 from colorama import *
 
-from .display import cls, confirm, menu_de_detalles, title
+from .display import cls, confirm, gestion_menu, title
 from .gestor import *
 from .logger import logger
+from .operaciones import *
+from .vehiculos import *
+
+gestor = GestorSistema()
 
 
-def new_task(tasks):
-    cls()
-    title()
-    # Input de información de la tarea
-    name = input("Introduzca el nombre de la tarea: ")
-    details = {}
+def option1():
+    pass
+
+
+def option2():
+    """
+    Añade un vehículo a la flota.
+    """
     while True:
         cls()
         title()
-        print(Fore.GREEN + "Añadiendo tarea: " + Style.RESET_ALL + f"{name}")
-        menu_de_detalles()
-        opcion = input("Escriba el número del detalle que quiere añadir: ")
-        if opcion == "1":
-            cls()
-            title()
-            print(Fore.GREEN + "Añadiendo tarea:" + Style.RESET_ALL + f"{name}")
-            details["descripcionion"] = input(
-                Fore.YELLOW
-                + "Escriba una breve descripción de su tares: "
-                + Style.RESET_ALL
-            )
-
-        if opcion == "2":
-            cls()
-            title()
-            print(Fore.GREEN + "Añadiendo tarea:" + Style.RESET_ALL + f"{name}")
+        gestion_menu()
+        action = input("Seleccione una opción (1,2 o 3): ")
+        cls()
+        title()
+        if action == "1":
             while True:
-                try:
-                    priority = int(
-                        input(
-                            Fore.YELLOW
-                            + "Evalue la prioridad de su tare del 1 al 10: "
-                            + Style.RESET_ALL
-                        )
+                plate = input("Introduzca la matrícula del coche (formato: 0000AAA): ")
+                if validate_plate(plate) is False:
+                    logger.error(
+                        Fore.RED
+                        + "La matrícula introducida no es válida."
+                        + Style.RESET_ALL
                     )
-                    if priority not in range(11):
-                        continue
-                    else:
-                        details["prioridad"] = priority
-                        break
-                except ValueError:
                     continue
-
-        if opcion == "3":
-            cls()
-            title()
-            print(Fore.GREEN + "Añadiendo tarea:" + Style.RESET_ALL + f"{name}")
-            details["fecha limite"] = input_date()
-
-        if opcion == "4":
-            cls()
-            title()
-            print(Fore.GREEN + "Añadiendo tarea:" + Style.RESET_ALL + f"{name}")
-            details["etiquetas"] = (
-                input(
-                    Fore.YELLOW
-                    + "Escriba las etiquetas que le gustaría añadir a la tarea: "
-                    + Style.RESET_ALL
-                )
-                .lower()
-                .replace(",", " ")
-                .split()
-            )
-
-        if opcion == "5":
-            cls()
-            title()
-            name = input(
-                Fore.YELLOW + "Escriba el nuevo nombre de la tarea: " + Style.RESET_ALL
-            )
-
-        if opcion == "6":
-            cls()
-            title()
-            print(Fore.GREEN + f"Tarea {name} añadida correctamente" + Style.RESET_ALL)
-            tasks.append(add_task(name, **details))
-            confirm()
-            break
-    return tasks
-
-
-def show_list(tasks):
-    cls()
-    title()
-    if not tasks:
-        print(Fore.RED + "No hay ninguna tarea en la lista" + Style.RESET_ALL)
-    else:
-        print(Fore.YELLOW + Style.BRIGHT + "Lista de tareas:\n" + Style.RESET_ALL)
-        for task in tasks:
-            print(f"- {task['nombre']}")
-        print()
+                brand = input("Introduzca la marca del coche: ")
+                model = input("Introduzca el modelo del coche: ")
+                vehicle = Coche(plate, brand, model)
+                gestor.add_vehicle(vehicle)
+                logger.info(f"Vehículo {vehicle} añadido correctamente a la flota.")
+                break
+        if action == "2":
+            while True:
+                plate = input("Introduzca la matrícula de la moto (formato: 0000AAA): ")
+                if validate_plate(plate) is False:
+                    logger.error(
+                        Fore.RED
+                        + "La matrícula introducida no es válida."
+                        + Style.RESET_ALL
+                    )
+                    continue
+                brand = input("Introduzca la marca de la moto: ")
+                model = input("Introduzca el modelo de la moto: ")
+                vehicle = Moto(plate, brand, model)
+                gestor.add_vehicle(vehicle)
+                logger.info(f"Vehículo {vehicle} añadido correctamente a la flota.")
+                break
+            if action == "3":
+                logger.info("Volviendo al menú principal...")
+                break
+            else:
+                continue
+        break
     confirm()
 
 
-def search_task(tasks):
-    cls()
-    title()
-    if not tasks:
-        print(Fore.RED + "No hay ninguna tarea en la lista" + Style.RESET_ALL)
-        confirm()
-        return
-    else:
-        search = input("Escriba la tarea de la que quiere los detalles: ")
-        results = []
-        for task in tasks:
-            if search.lower() in task["nombre"].lower():
-                results.append(task)
-        if results == []:
-            print(
-                Fore.RED
-                + f"No se ha encontrado ninguna tarea con nombre: {search}"
-                + Style.RESET_ALL
-            )
-            confirm()
-        else:
-            cls()
-            title()
-            print(
-                Fore.YELLOW
-                + Style.BRIGHT
-                + f"Se han encontrado {len(results)} resultados para: {search}"
-                + Style.RESET_ALL
-            )
-            index = 1
-            for task in results:
-                if search.lower() in task["nombre"].lower():
-                    print(Fore.YELLOW + f"\nResultado {index}:")
-                    index += 1
-                    for key, value in task.items():
-                        print(Fore.GREEN + f"{key}:" + Style.RESET_ALL + f" {value}")
-            print(Style.RESET_ALL)
-            confirm()
+def option3():
+    pass
+
+
+def oprion4():
+    pass

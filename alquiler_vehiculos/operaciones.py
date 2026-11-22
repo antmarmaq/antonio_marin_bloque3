@@ -1,14 +1,15 @@
 from datetime import date
 
 from colorama import *
-from logger import logger
+
+from .logger import logger
 
 
 def validate_plate(plate):
     """
-    Se asegura de que la matricula sea valida
+    Se asegura de que la matricula sea valida, devuelve True o False
     """
-    return len(plate) == 7 and plate[:4].isdigit() and plate[3:].isalpha()
+    return len(plate) == 7 and plate[:4].isdigit() and plate[4:].isalpha()
 
 
 def input_date():

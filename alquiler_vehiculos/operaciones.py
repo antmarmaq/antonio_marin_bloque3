@@ -14,7 +14,7 @@ def validate_plate(plate):
 
 def input_date():
     """
-    Muestra una serie de inputs para dia, mes y año y devuelve una fecha en formato string DD/MM/AAAA
+    Muestra una serie de inputs para dia, mes y año y devuelve una fecha en formato day
     """
     while True:
         day = input(Fore.YELLOW + "Escriba el día (en formado dd): " + Style.RESET_ALL)

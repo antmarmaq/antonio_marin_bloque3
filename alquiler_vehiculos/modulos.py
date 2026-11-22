@@ -48,7 +48,11 @@ def option1():
                 confirm()
                 break
             if action == "3":
-                input("Volviendo al menú principal\nPulse enter para continuar...")
+                input(
+                    Fore.GREEN
+                    + "Volviendo al menú principal\nPulse enter para continuar..."
+                    + Style.RESET_ALL
+                )
                 break
             else:
                 continue
@@ -179,30 +183,36 @@ def option3():
         confirm()
         return
 
-    search = input(
-        Fore.YELLOW
-        + "Introduzca la matrícula del vehiculo que desea reservar: "
-        + Style.RESET_ALL
-    ).upper()
-    vehicle = gestor.find_vehicle(search)
-
-    if vehicle is None:
-        logger.error(
-            Fore.RED
-            + f"El vehiculo con matricula {search} no se ha encontrado"
+    while True:
+        cls()
+        title()
+        print(Fore.YELLOW + "Realizando nueva reserva." + Style.RESET_ALL)
+        search = input(
+            Fore.YELLOW
+            + "Introduzca la matrícula del vehiculo que desea reservar: "
             + Style.RESET_ALL
-        )
+        ).upper()
+        vehicle = gestor.find_vehicle(search)
 
-    reservation = input_date()
-    if gestor.reserve_vehicle(vehicle, reservation):
-        save(gestor)
-        print(Fore.GREEN + "Reserva realizada correctamente" + Style.RESET_ALL)
-    else:
-        logger.error(
-            Fore.RED + "Ha habido un problema al realizar la reserva" + Style.RESET_ALL
-        )
+        if vehicle is None:
+            logger.error(
+                Fore.RED
+                + f"El vehiculo con matricula {search} no se ha encontrado"
+                + Style.RESET_ALL
+            )
+            confirm()
+            break
 
-    confirm()
+        reservation = input_date()
+        if gestor.reserve_vehicle(vehicle, reservation):
+            save(gestor)
+            confirm()
+            break
+        else:
+            logger.error(
+                Fore.RED + "No se ha podido realizar la reserva." + Style.RESET_ALL
+            )
+        confirm()
 
 
 def option4():

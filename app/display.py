@@ -31,7 +31,7 @@ def menu():
     """
     print(Fore.YELLOW + "\U00002554" + 35 * "\U00002550" + "\U00002557")
     print("\U00002551" + " 1. Ver vehiculos de la flota.  \U0001f697 " + "\U00002551")
-    print("\U00002551" + " 2. Añadir vehiculo a la flota. \U00002795 " + "\U00002551")
+    print("\U00002551" + " 2. Añadir vehiculos a la flota.\U00002795 " + "\U00002551")
     print("\U00002551" + " 3. Reservar un vehiculo.       \U0001f4c5 " + "\U00002551")
     print("\U00002551" + " 4. Consultar reservas.         \U0001f50e " + "\U00002551")
     print("\U00002551" + " 5. Cerrar el programa.         \U0001f6aa " + "\U00002551")

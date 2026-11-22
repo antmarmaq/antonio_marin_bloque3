@@ -12,25 +12,27 @@ class GestorSistema:
     """
 
     def __init__(self):
-        self._vehicles = []
+        self.__vehicles = []
         # Cargamos los datos de persistencia.py
         load(self)
 
     @property
     def vehicles(self):
-        return tuple(self._vehicles)
+        return tuple(self.__vehicles)
 
     def add_vehicle(self, vehicle):
         """
         Añade un objeto vehiculo al gestor
         """
-        self._vehicles.append(vehicle)
+        if self.find_vehicle(vehicle.plate) is not None:
+            raise ValueError(f"Ya existe un vehiculo con la matricula {vehicle.plate}")
+        self.__vehicles.append(vehicle)
 
     def find_vehicle(self, plate):
         """
         Funcion que usa el gestor y un numero de matricula para devolver el vehiculo que tiene dicha matricula
         """
-        for vehicle in self.vehicles:
+        for vehicle in self.__vehicles:
             if vehicle.plate == plate:
                 return vehicle
 
@@ -38,7 +40,7 @@ class GestorSistema:
         """
         function that takes a vehicle from gestor and a date and adds the reservation to the vehicles reservations list atribute
         """
-        if vehicle not in self.vehicles:
+        if vehicle not in self.__vehicles:
             logger.error(
                 Fore.RED
                 + "El vehiculo no se ha encontrado en la flota"

@@ -8,16 +8,22 @@ RESERVATIONS_FILE = Path(__file__).parent.parent / "reservas.txt"
 
 
 def save(gestor):
-    with VEHICLES_FILE.open("w", encoding="utf-8") as f:
+    """
+    Toma como entrada el gestor, y escribe los archivos de texto con la información.
+    """
+    with open(VEHICLES_FILE, "w", encoding="utf-8") as f:
         for vehicle in gestor.vehicles:
             f.write(f"{vehicle.kind};{vehicle.plate};{vehicle.brand};{vehicle.model}\n")
-    with RESERVATIONS_FILE.open("w", encoding="utf-8") as f:
+    with open(RESERVATIONS_FILE, "w", encoding="utf-8") as f:
         for vehicle in gestor.vehicles:
             for reservation in vehicle.reservations:
                 f.write(f"{vehicle.plate};{reservation.isoformat()}\n")
 
 
 def load(gestor):
+    """ "
+    Toma como entrada un gestor, lee los archivos reservas.txt y vehiculos.txt, los convierte en coches/motos, y los incluye a los vehiculos del gestor
+    """
     if VEHICLES_FILE.exists():
         for line in VEHICLES_FILE.read_text(encoding="utf-8").splitlines():
             if not line.strip():

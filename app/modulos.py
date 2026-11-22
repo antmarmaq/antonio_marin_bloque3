@@ -87,6 +87,13 @@ def option2():
                         + Style.RESET_ALL
                     )
                     continue
+                if gestor.find_vehicle(plate) is not None:
+                    logger.error(
+                        Fore.RED
+                        + "La matrícula introducida ya existe"
+                        + Style.RESET_ALL
+                    )
+                    continue
                 brand = (
                     input(
                         Fore.YELLOW
@@ -105,8 +112,12 @@ def option2():
                     .capitalize()
                     .replace(";", ",")
                 )
-                vehicle = Coche(plate, brand, model)
-                gestor.add_vehicle(vehicle)
+                try:
+                    vehicle = Coche(plate, brand, model)
+                    gestor.add_vehicle(vehicle)
+                except ValueError as e:
+                    logger.error(Fore.RED + str(e) + Style.RESET_ALL)
+                    continue
                 save(gestor)
                 logger.info(
                     Fore.GREEN
@@ -133,6 +144,13 @@ def option2():
                         + Style.RESET_ALL
                     )
                     continue
+                if gestor.find_vehicle(plate) is not None:
+                    logger.error(
+                        Fore.RED
+                        + "La matrícula introducida ya existe"
+                        + Style.RESET_ALL
+                    )
+                    continue
                 brand = (
                     input(
                         Fore.YELLOW
@@ -151,8 +169,12 @@ def option2():
                     .capitalize()
                     .replace(";", ",")
                 )
-                vehicle = Moto(plate, brand, model)
-                gestor.add_vehicle(vehicle)
+                try:
+                    vehicle = Moto(plate, brand, model)
+                    gestor.add_vehicle(vehicle)
+                except ValueError as e:
+                    logger.error(Fore.RED + str(e) + Style.RESET_ALL)
+                    continue
                 save(gestor)
                 logger.info(
                     Fore.GREEN
@@ -237,7 +259,7 @@ def option4():
     else:
         i = 1
         for reservation, vehicle in all_reservations:
-            print(f"{i} {reservation}, {vehicle}")
+            print(f"{i}. {reservation}, {vehicle}")
             i += 1
         print()
         confirm()

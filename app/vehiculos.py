@@ -5,45 +5,45 @@ class Vehiculos:
 
     def __init__(self, plate, brand, model):
         self.brand = brand
-        self._plate = plate
+        self.__plate = plate
         self.model = model
-        self._reservations = []
+        self.__reservations = []
 
     @property
     def plate(self):
-        return self._plate
+        return self.__plate
 
     @property
     def reservations(self):
-        return tuple(self._reservations)
+        return tuple(self.__reservations)
 
     @property
     def brand(self):
-        return self._brand
+        return self.__brand
 
     @brand.setter
     def brand(self, value):
         value = value.strip()
         if not value:
             raise ValueError("El vehículo tiene que tener una marca")
-        self._brand = value
+        self.__brand = value
 
     @property
     def model(self):
-        return self._model
+        return self.__model
 
     @model.setter
     def model(self, value):
         value = value.strip()
         if not value:
             raise ValueError("El vehículo debe tener un modelo")
-        self._model = value
+        self.__model = value
 
     def add_reservation(self, reservation):
         """
         Añade una reserva a la lista de reservas del vehículo.
         """
-        self._reservations.append(reservation)
+        self.__reservations.append(reservation)
 
     def __str__(self):
         return f"{self.kind} {self.brand} {self.model} con matrícula ({self.plate})"

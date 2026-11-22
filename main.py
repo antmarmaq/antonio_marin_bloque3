@@ -1,5 +1,5 @@
-from alquiler_vehiculos.display import cls, menu, title
-from alquiler_vehiculos.modulos import *
+from app.display import cls, menu, title
+from app.modulos import *
 
 """
 // 1. INICIALIZACIÓN
@@ -36,7 +36,6 @@ MIENTRAS Verdadero:
 """
 
 # Inicializamos creando la lista vacía de tareas.
-tasks = []
 try:
     while True:
         cls()
@@ -47,16 +46,16 @@ try:
         if action == "1":
             option1()
 
-        if action == "2":
+        elif action == "2":
             option2()
 
-        if action == "3":
+        elif action == "3":
             option3()
 
-        if action == "4":
+        elif action == "4":
             option4()
 
-        if action == "5":
+        elif action == "5":
             print("Cerrando el programa...")
             break
         else:
